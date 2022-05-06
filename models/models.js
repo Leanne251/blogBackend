@@ -23,3 +23,12 @@ export async function postTheComments({ blogID, date, userName, comment }) {
 		console.log('error', e);
 	}
 }
+
+export async function deleteComment(id) {
+	try {
+		const result = await db.query(`DELETE FROM comments WHERE id=$1 RETURNING id`, [ id ]);
+		return result.rows;
+	} catch (e) {
+		console.log('err', e);
+	}
+}
